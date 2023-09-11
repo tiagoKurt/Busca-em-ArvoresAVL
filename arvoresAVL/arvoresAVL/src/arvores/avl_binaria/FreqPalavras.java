@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class FreqPalavras {
+public class FreqPalavras  {
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
 
-        String nomeArquivo = "./src/arvores/arquivos/teste.txt"; 
+        String nomeArquivo = ""; 
         Map<String, Integer> mapaPalavras = new HashMap<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
@@ -45,7 +45,7 @@ public class FreqPalavras {
     public void frequenciaPalavras(String nomeArquivo){
         long startTime = System.currentTimeMillis();
 
-        nomeArquivo = "./src/dicTXT/teste.txt"; 
+        nomeArquivo = nomeArquivo; 
         Map<String, Integer> mapaPalavras = new HashMap<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
