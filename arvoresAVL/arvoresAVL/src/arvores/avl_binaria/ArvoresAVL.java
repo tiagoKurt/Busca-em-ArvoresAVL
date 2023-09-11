@@ -1,4 +1,4 @@
-package arvoresavl;
+package Arvores.avl_binaria;
 
 import java.util.ArrayList;
 import java.util.Collections;
