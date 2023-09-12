@@ -1,8 +1,8 @@
-package Arvores.avl_binaria;
+package arvores.avl_binaria;
 
 import javax.swing.SortOrder;
 
-import Arvores.avl_binaria.ArvoresAVL;
+import arvores.avl_binaria.ArvoresAVL;
 
 public class ClassTest {
 

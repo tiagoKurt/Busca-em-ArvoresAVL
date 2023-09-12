@@ -1,6 +1,6 @@
-package Arvores.avl_binaria;
+package arvores.avl_binaria;
 
-import Arvores.avl_binaria.ArvoresAVL;
+import arvores.avl_binaria.ArvoresAVL;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-import Arvores.busca.Busca;
+import arvores.busca.Busca;
 
 public class treeDic {
 

@@ -1,4 +1,4 @@
-package Arvores.avl_binaria;
+package arvores.avl_binaria;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class ArvoresAVL {
+    private int contadorDeMovimentos;
 
+
+
+    
     private class Node {
         String value;
         Node left, right;
@@ -40,12 +44,13 @@ public class ArvoresAVL {
     public int binarySearch(String palavra) {
         Node no = find(root, String.valueOf(palavra.charAt(0)));
         Collections.sort(no.listaDePalavras);
-
+        int contadorDeMovimentos = 0;
         int comeco = 0;
         int fim = no.listaDePalavras.size() - 1;
         while (comeco <= fim) {
             int meio = (comeco + fim) / 2;
             int cmp = palavra.compareTo(no.listaDePalavras.get(meio));
+            setContadorDeMovimentos((getContadorDeMovimentos() + contadorDeMovimentos++));
             if (cmp == 0) {
                 return meio;
             } else if (cmp < 0) {
@@ -340,4 +345,33 @@ public class ArvoresAVL {
     public void printAVLTree() {
         printAVLTree(root, "", true);
     }
+
+    /**
+     * @return int return the contadorDeMovimentos
+     */
+    public int getContadorDeMovimentos() {
+        return contadorDeMovimentos;
+    }
+
+    /**
+     * @param contadorDeMovimentos the contadorDeMovimentos to set
+     */
+    public void setContadorDeMovimentos(int contadorDeMovimentos) {
+        this.contadorDeMovimentos = contadorDeMovimentos;
+    }
+
+    /**
+     * @return Node return the root
+     */
+    public Node getRoot() {
+        return root;
+    }
+
+    /**
+     * @param root the root to set
+     */
+    public void setRoot(Node root) {
+        this.root = root;
+    }
+
 }
