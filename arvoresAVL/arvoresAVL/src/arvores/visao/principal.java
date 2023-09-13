@@ -1,7 +1,9 @@
 package arvores.visao;
 
+import arvores.avl_binaria.ArvoresAVL;
 import arvores.avl_binaria.FreqPalavras;
 import arvores.avl_binaria.FrequenciaGeral;
+import arvores.avl_binaria.InsercaoBinaria;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.TextArea;
@@ -11,6 +13,8 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -38,9 +42,10 @@ public class principal extends javax.swing.JFrame {
         jButton1_frequencia1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton1_frequencia2 = new javax.swing.JButton();
+        jButton1_binaria = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1_saidaArvores = new javax.swing.JTextArea();
+        jButton1_avl = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton1_limparCampos = new javax.swing.JButton();
         jButton1_avancar = new javax.swing.JButton();
@@ -84,16 +89,16 @@ public class principal extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arvores/icons/floresta.png"))); // NOI18N
         jFrame1_avancar.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, 90, 70));
 
-        jButton1_frequencia2.setFont(new java.awt.Font("Serif", 3, 16)); // NOI18N
-        jButton1_frequencia2.setText("BUSCA BINÁRIA");
-        jButton1_frequencia2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jButton1_frequencia2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1_frequencia2.addActionListener(new java.awt.event.ActionListener() {
+        jButton1_binaria.setFont(new java.awt.Font("Serif", 3, 16)); // NOI18N
+        jButton1_binaria.setText("BUSCA BINÁRIA");
+        jButton1_binaria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jButton1_binaria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1_binaria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1_frequencia2ActionPerformed(evt);
+                jButton1_binariaActionPerformed(evt);
             }
         });
-        jFrame1_avancar.getContentPane().add(jButton1_frequencia2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 240, 160, 40));
+        jFrame1_avancar.getContentPane().add(jButton1_binaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 240, 160, 40));
 
         jTextArea1_saidaArvores.setColumns(20);
         jTextArea1_saidaArvores.setFont(new java.awt.Font("Serif", 3, 18)); // NOI18N
@@ -102,6 +107,17 @@ public class principal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1_saidaArvores);
 
         jFrame1_avancar.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 670, 330));
+
+        jButton1_avl.setFont(new java.awt.Font("Serif", 3, 16)); // NOI18N
+        jButton1_avl.setText("ÁRVORE AVL");
+        jButton1_avl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jButton1_avl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1_avl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1_avlActionPerformed(evt);
+            }
+        });
+        jFrame1_avancar.getContentPane().add(jButton1_avl, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 290, 160, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arvores/icons/5479107.jpg"))); // NOI18N
         jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
@@ -251,9 +267,41 @@ public class principal extends javax.swing.JFrame {
         pog.frequenciaPalavras(caminhoCortado);
     }//GEN-LAST:event_jButton1_frequencia1ActionPerformed
 
-    private void jButton1_frequencia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_frequencia2ActionPerformed
+    private void jButton1_binariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_binariaActionPerformed
+        InsercaoBinaria oMeuDeus = new InsercaoBinaria();
+        String caminhoCompleto = jTextField1_aux.getText();
+        String caminhoDesejado = "src";
+        String caminhoCortado = "";
+        int startIndex = caminhoCompleto.indexOf(caminhoDesejado);
 
-    }//GEN-LAST:event_jButton1_frequencia2ActionPerformed
+        if (startIndex != -1) {
+            caminhoCortado = caminhoCompleto.substring(startIndex);
+        }
+        PrintStream printStream = new PrintStream(new TextAreaOutputStream(jTextArea1_saidaArvores));
+        System.setOut(printStream);
+        oMeuDeus.insercaoBinaria(caminhoCortado);
+    }//GEN-LAST:event_jButton1_binariaActionPerformed
+
+    private void jButton1_avlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_avlActionPerformed
+        try {
+            principalTerminal arvoreAVL = new principalTerminal();
+            
+            String caminhoCompleto = jTextField1_aux.getText();
+            String caminhoDesejado = "src";
+            String caminhoCortado = "";
+            int startIndex = caminhoCompleto.indexOf(caminhoDesejado);
+            
+            if (startIndex != -1) {
+                caminhoCortado = caminhoCompleto.substring(startIndex);
+            }
+            PrintStream printStream = new PrintStream(new TextAreaOutputStream(jTextArea1_saidaArvores));
+            System.setOut(printStream);
+            arvoreAVL.AdiconarArvoreAVL(caminhoCortado);
+        } catch (IOException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1_avlActionPerformed
+    
     public class TextAreaOutputStream extends OutputStream {
     private final JTextArea textArea;
     private final StringBuilder buffer = new StringBuilder();
@@ -327,8 +375,9 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1_BuscarTexto1;
     private javax.swing.JButton jButton1_BuscarTexto2;
     private javax.swing.JButton jButton1_avancar;
+    private javax.swing.JButton jButton1_avl;
+    private javax.swing.JButton jButton1_binaria;
     private javax.swing.JButton jButton1_frequencia1;
-    private javax.swing.JButton jButton1_frequencia2;
     private javax.swing.JButton jButton1_limparCampos;
     private javax.swing.JFrame jFrame1_avancar;
     private javax.swing.JLabel jLabel1;

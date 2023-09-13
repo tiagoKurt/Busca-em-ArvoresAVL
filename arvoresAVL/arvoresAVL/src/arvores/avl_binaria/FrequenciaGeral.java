@@ -17,7 +17,7 @@ public class FrequenciaGeral  {
         try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
             String linha;
             while ((linha = br.readLine()) != null) {
-                linha = linha.toUpperCase().replaceAll("[^a-zA-ZÀ-ÿ\\s]", " ");
+                linha = linha.toUpperCase().replaceAll("[.,^a-zA-ZÀ-ÿ\\s]", " ");
                 String[] palavras = linha.split("\\s+");
 
                 for (String palavra : palavras) {

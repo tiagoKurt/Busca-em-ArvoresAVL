@@ -4,51 +4,109 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import arvores.avl_binaria.ArvoresAVL;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.HashMap;
+import java.util.Map;
 
 public class principalTerminal {
-    public static void main(String[] args) {
-        String[] letras = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
-        "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
 
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        String[] letras = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+            "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
-        
         Scanner entrada = new Scanner(System.in);
         ArrayList<String> buscador = new ArrayList<>();
         ArvoresAVL arvore = new ArvoresAVL();
         for (int i = 0; i < letras.length; i++) {
             arvore.insert(letras[i]);
         }
+
         arvore.printAVLTree();
-        
-        String text = "Esta e uma implementação de exemplo em Java para contar a frequência de palavras em uma estrutura de dados.";
+        String nomeArquivo = "./src/arvores/arquivos/ExTexto.txt";
+        Map<String, Integer> mapaPalavras = new HashMap<>();
+        ArrayList<String> skr = new ArrayList<>();
 
-        // Dividir o texto em palavras
-        String[] words = text.split("\\s+");
-
-        for(int i = 0;i < words.length;i++){
-            buscador.add(words[i].toUpperCase());
-            arvore.addPalavra(words[i].toUpperCase());
-        }
-
-    
-        for (int i = 0; i < words.length; i++) {
-            System.out.println(words[i]);
-            buscador.add(words[i].toUpperCase());
-            arvore.addPalavra(words[i].toUpperCase());
-        }
-        
-        for (int i = 0; i < buscador.size(); i++) {
-
-            if (arvore.acharPalavras(buscador.get(i)) == true) {
-                System.out.println(
-                        "A palavra foi achada na posição: " + arvore.binarySearch(buscador.get(i)));
-                System.out.println("Movimentos: " + arvore.getContadorDeMovimentos());     
-            } else {
-                System.out.println("A palavra: " + buscador.get(i) + ", não foi encontrada!");
+        try ( BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                linha = linha.toLowerCase().replaceAll("[^a-zA-ZÀ-ÿ\\s]", " ");
+                String[] palavras = linha.split("\\s+");
+                for (int i = 0; i < palavras.length; i++) {
+                    buscador.add(palavras[i].toUpperCase());
+                    arvore.addPalavra(palavras[i].toUpperCase());
+                }
+            }
+            for (int i = 0; i < buscador.size(); i++) {
+                System.out.println(buscador.get(i));
             }
 
-        }
-        buscador.clear();
+            for (int i = 0; i < buscador.size(); i++) {
+                if (arvore.binarySearch(buscador.get(i)) != -1) {
+                    System.out.println(buscador.get(i));
+                    System.out.println(
+                            "A palavra foi achada na posição: " + i);
 
+                } else {
+                    System.out.println("A palavra: " + buscador.get(i) + ", não foi encontrada!");
+
+                }
+            }
+            System.out.println("Movimentos: " + arvore.getContadorDeMovimentos());
+            buscador.clear();
+
+        }
+    }
+
+    public void AdiconarArvoreAVL(String arquivo) throws FileNotFoundException, IOException {
+         long startTime = System.nanoTime();
+        String[] letras = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+            "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+
+        Scanner entrada = new Scanner(System.in);
+        ArrayList<String> buscador = new ArrayList<>();
+        ArvoresAVL arvore = new ArvoresAVL();
+        for (int i = 0; i < letras.length; i++) {
+            arvore.insert(letras[i]);
+        }
+
+        arvore.printAVLTree();
+        Map<String, Integer> mapaPalavras = new HashMap<>();
+        ArrayList<String> skr = new ArrayList<>();
+
+        try ( BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                linha = linha.toLowerCase().replaceAll("[^a-zA-ZÀ-ÿ\\s]", " ");
+                String[] palavras = linha.split("\\s+");
+                for (int i = 0; i < palavras.length; i++) {
+                    buscador.add(palavras[i].toUpperCase());
+                    arvore.addPalavra(palavras[i].toUpperCase());
+                }
+            }
+            for (int i = 0; i < buscador.size(); i++) {
+                System.out.println(buscador.get(i));
+            }
+
+            for (int i = 0; i < buscador.size(); i++) {
+                if (arvore.binarySearch(buscador.get(i)) != -1) {
+                    System.out.println(buscador.get(i));
+                    System.out.println(
+                            "A palavra foi achada na posicao: " + i);
+
+                } else {
+                    System.out.println("A palavra: " + buscador.get(i) + ", não foi encontrada!");
+
+                }
+            }
+            System.out.println("Movimentos: " + arvore.getContadorDeMovimentos());
+            buscador.clear();
+            long endTime = System.nanoTime();
+            double elapsedTimeInSeconds = (endTime - startTime) / 1e9;
+            System.out.println("Tempo de pesquisa (segundos): " + elapsedTimeInSeconds);
+        }
     }
 }

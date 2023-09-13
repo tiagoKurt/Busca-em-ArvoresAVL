@@ -56,7 +56,7 @@ public class InsercaoBinaria {
         int comparisons = 0; // Contador de comparações
 
         try {
-            pog = "./src/arvores/arquivos/teste.txt"; // Substitua pelo nome do seu arquivo de texto
+             // Substitua pelo nome do seu arquivo de texto
             BufferedReader br = new BufferedReader(new FileReader(pog));
 
             DynamicArray words = new DynamicArray();
@@ -81,10 +81,10 @@ public class InsercaoBinaria {
             long endTime = System.nanoTime();
             double elapsedTimeInSeconds = (endTime - startTime) / 1e9; // Tempo em segundos
 
-            System.out.println("Pesquisa Binária:");
+            System.out.println("Pesquisa Binaria:");
             System.out.println("Total de palavras distintas no arquivo: " + words.size());
             System.out.println("Tempo de pesquisa (segundos): " + elapsedTimeInSeconds);
-            System.out.println("Número de comparações: " + comparisons);
+            System.out.println("Numero de comparacoes: " + comparisons);
 
 //            bagulho para mostrar a frequência das palavras está com defeito
 //            for (String word : words.getWords()) {
