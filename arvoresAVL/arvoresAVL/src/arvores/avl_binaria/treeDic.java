@@ -1,5 +1,6 @@
 package arvores.avl_binaria;
 
+import Arvores.busca.Busca;
 import arvores.avl_binaria.ArvoresAVL;
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,17 +16,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-import arvores.busca.Busca;
 
 public class treeDic {
 
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
         try {
-            File arquivo = new File("./src/dicTXT/dicPort.txt");
-            File dicSaida = new File("./src/dicTXT/newDic.txt");
-            Path arquivoo = Paths.get("./src/dicTXT/newDic.txt");
-            File saidinha = new File("./src/dicTXT/dicTXT/newDic.txt");
+            File arquivo = new File("./src/arquivos/dicPort.txt");
+            File dicSaida = new File("./src/arquivos/newDic.txt");
+            Path arquivoo = Paths.get("./src/arquivos/newDic.txt");
+            File saidinha = new File("./src/arquivos/newDic.txt");
             byte[] dicionario = Files.readAllBytes(arquivoo);
             String dicLer = new String(dicionario);
 

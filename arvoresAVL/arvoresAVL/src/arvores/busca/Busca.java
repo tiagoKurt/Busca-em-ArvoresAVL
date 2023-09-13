@@ -3,6 +3,7 @@ package Arvores.busca;
 import java.util.ArrayList;
 
 public class Busca {
+
     public static int sequential(ArrayList<String> vetor, String word) throws Exception {
         for (int i = 0; i < vetor.size(); i++) {
             if (vetor.get(i).equalsIgnoreCase(word)) {
@@ -20,9 +21,7 @@ public class Busca {
                     return i;
                 }
             }
-        }
-
-        else if (palavraBuscada.length() < palavra.get(meio).length()) {
+        } else if (palavraBuscada.length() < palavra.get(meio).length()) {
             return binary(palavra, palavraBuscada, inicio, (meio - 1));
         } else if (palavraBuscada.length() > palavra.get(meio).length()) {
             return binary(palavra, palavraBuscada, (meio + 1), fim);
