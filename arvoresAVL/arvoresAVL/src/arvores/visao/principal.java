@@ -249,6 +249,7 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1_BuscarTexto2ActionPerformed
 
     private void jButton1_frequencia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_frequencia1ActionPerformed
+        jTextArea1_saidaArvores.setText("");
         FrequenciaGeral pog = new FrequenciaGeral();
 
         String caminhoCortado = "";
@@ -268,6 +269,7 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1_frequencia1ActionPerformed
 
     private void jButton1_binariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_binariaActionPerformed
+        jTextArea1_saidaArvores.setText("");
         InsercaoBinaria oMeuDeus = new InsercaoBinaria();
         String caminhoCompleto = jTextField1_aux.getText();
         String caminhoDesejado = "src";
@@ -284,6 +286,7 @@ public class principal extends javax.swing.JFrame {
 
     private void jButton1_avlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_avlActionPerformed
         try {
+            jTextArea1_saidaArvores.setText("");
             principalTerminal arvoreAVL = new principalTerminal();
             
             String caminhoCompleto = jTextField1_aux.getText();
