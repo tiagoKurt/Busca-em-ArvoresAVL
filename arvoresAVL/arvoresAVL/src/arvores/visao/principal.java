@@ -4,6 +4,7 @@ import arvores.avl_binaria.ArvoresAVL;
 import arvores.avl_binaria.FreqPalavras;
 import arvores.avl_binaria.FrequenciaGeral;
 import arvores.avl_binaria.InsercaoBinaria;
+import arvores.imprimirAVL.mainArvorePalavras;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.TextArea;
@@ -30,6 +31,7 @@ public class principal extends javax.swing.JFrame {
         jButton1_avancar.setVisible(false);
         jTextField1_aux.setVisible(false);
         jTextArea1_saidaArvores.setEnabled(false);
+        jButton1_limparCampos.setVisible(false);
         
     }
 
@@ -216,6 +218,7 @@ public class principal extends javax.swing.JFrame {
                 caminhoCortado = caminhoCompleto.substring(startIndex);
             }
             jTextField1_nomeDoArquivo.setText("./" + caminhoCortado.toUpperCase());
+            jButton1_limparCampos.setVisible(true);
 
         } catch (Exception erro) {
             JOptionPane.showMessageDialog(this, "Arquivo não selecionado!");
@@ -230,7 +233,7 @@ public class principal extends javax.swing.JFrame {
         jFrame1_avancar.setBounds(0, 0, 1110, 750);
         jFrame1_avancar.setVisible(true);
         jFrame1_avancar.setLocationRelativeTo(null);
-        this.dispose();
+        this.setVisible(false);
 
     }//GEN-LAST:event_jButton1_avancarActionPerformed
 
@@ -239,13 +242,13 @@ public class principal extends javax.swing.JFrame {
         jTextField1_aux.setText("");
         jButton1_avancar.setVisible(false);
         jTextField1_nomeDoArquivo.setVisible(false);
+        jButton1_limparCampos.setVisible(false);
     }//GEN-LAST:event_jButton1_limparCamposActionPerformed
 
     private void jButton1_BuscarTexto2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_BuscarTexto2ActionPerformed
-        principal pog = new principal();
-        pog.setVisible(true);
+        this.setVisible(true);
         jFrame1_avancar.dispose();
-
+        jTextArea1_saidaArvores.setText("");
     }//GEN-LAST:event_jButton1_BuscarTexto2ActionPerformed
 
     private void jButton1_frequencia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_frequencia1ActionPerformed
@@ -287,7 +290,7 @@ public class principal extends javax.swing.JFrame {
     private void jButton1_avlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_avlActionPerformed
         try {
             jTextArea1_saidaArvores.setText("");
-            principalTerminal arvoreAVL = new principalTerminal();
+            mainArvorePalavras arvoreAVL = new mainArvorePalavras();
             
             String caminhoCompleto = jTextField1_aux.getText();
             String caminhoDesejado = "src";
@@ -299,7 +302,8 @@ public class principal extends javax.swing.JFrame {
             }
             PrintStream printStream = new PrintStream(new TextAreaOutputStream(jTextArea1_saidaArvores));
             System.setOut(printStream);
-            arvoreAVL.AdiconarArvoreAVL(caminhoCortado);
+            arvoreAVL.ImprimirArvoreTela(caminhoCortado);
+            
         } catch (IOException ex) {
             Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
         }

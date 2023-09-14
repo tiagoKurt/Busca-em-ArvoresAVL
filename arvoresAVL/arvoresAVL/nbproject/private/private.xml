@@ -3,17 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/aluno/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/avl_binaria/InsercaoBinaria.java</file>
-            <file>file:/C:/Users/aluno/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/visao/principalTerminal.java</file>
-            <file>file:/C:/Users/aluno/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/visao/principal.java</file>
-            <file>file:/C:/Users/aluno/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/avl_binaria/treeDic.java</file>
-            <file>file:/C:/Users/aluno/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/avl_binaria/FrequenciaGeral.java</file>
-            <file>file:/C:/Users/aluno/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/avl_binaria/ArvoresAVL.java</file>
-            <file>file:/C:/Users/aluno/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/avl_binaria/FreqPalavras.java</file>
-            <file>file:/C:/Users/aluno/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/arquivos/newDic.txt</file>
-            <file>file:/C:/Users/aluno/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/avl_binaria/ArvoreImplement.java</file>
-            <file>file:/C:/Users/aluno/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/arquivos/ExTexto.txt</file>
-            <file>file:/C:/Users/aluno/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/arquivos/teste.txt</file>
+            <file>file:/C:/Users/tiago.moliveira/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/imprimirAVL/ImprimirArvorePalavras.java</file>
+            <file>file:/C:/Users/tiago.moliveira/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/avl_binaria/InsercaoBinaria.java</file>
+            <file>file:/C:/Users/tiago.moliveira/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/suporte/stopwords.txt</file>
+            <file>file:/C:/Users/tiago.moliveira/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/visao/principal.java</file>
+            <file>file:/C:/Users/tiago.moliveira/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/imprimirAVL/mainArvorePalavras.java</file>
+            <file>file:/C:/Users/tiago.moliveira/Documents/GitHub/Busca-em-ArvoresAVL/arvoresAVL/arvoresAVL/src/arvores/visao/principalTerminal.java</file>
         </group>
     </open-files>
 </project-private>

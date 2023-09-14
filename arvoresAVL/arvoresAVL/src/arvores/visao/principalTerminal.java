@@ -27,8 +27,7 @@ public class principalTerminal {
 
         arvore.printAVLTree();
         String nomeArquivo = "./src/arvores/arquivos/ExTexto.txt";
-        Map<String, Integer> mapaPalavras = new HashMap<>();
-        ArrayList<String> skr = new ArrayList<>();
+
 
         try ( BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
             String linha;
@@ -64,7 +63,7 @@ public class principalTerminal {
     public void AdiconarArvoreAVL(String arquivo) throws FileNotFoundException, IOException {
          long startTime = System.nanoTime();
         String[] letras = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
-            "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+            "K", "L", "M", "N", "O", "Poste", "p", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
         Scanner entrada = new Scanner(System.in);
         ArrayList<String> buscador = new ArrayList<>();

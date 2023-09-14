@@ -3,74 +3,48 @@ package arvores.avl_binaria;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class InsercaoBinaria {
 
     public static void main(String[] args) {
-        long startTime = System.nanoTime(); // Para medir o tempo de pesquisa
-        int comparisons = 0; // Contador de comparações
-
+        long startTime = System.nanoTime();
+        int comparisons = 0;
+        String stopWord = "./src/arvores/suporte/stopwords.txt";
+        String arquivo = "./src/arvores/arquivos/newDic.txt";
+        ArrayList<String> stopWords = new ArrayList<>();
         try {
-            String fileName = "./src/arvores/arquivos/teste.txt"; // Substitua pelo nome do seu arquivo de texto
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
 
-            DynamicArray words = new DynamicArray();
+            BufferedReader br = new BufferedReader(new FileReader(arquivo));
+            BufferedReader leitor2 = new BufferedReader(new FileReader(stopWord));
+            String linhaPrincipal;
 
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] lineWords = line.split("\\s+"); // Divide a linha em palavras
-                for (String word : lineWords) {
-                    String cleanedWord = word.toLowerCase().replaceAll("[^a-zA-ZÀ-ÿ\\s]", " ").toLowerCase(); // Limpa a palavra
-                    if (!cleanedWord.isEmpty()) {
-                        int index = words.binarySearch(cleanedWord);
-                        comparisons++;
-                        if (index < 0) {
-                            words.insert(-index - 1, cleanedWord); // Insere a palavra no vetor ordenado
-                        }
+            while ((linhaPrincipal = leitor2.readLine()) != null) {
+                String[] palavrasLinha = linhaPrincipal.split("\\s+");
+                for (String palavra : palavrasLinha) {
+                    palavra = palavra.replaceAll("[^a-zA-Z]", "");
+                    if (!palavra.isEmpty()) {
+                        stopWords.add(palavra.toLowerCase());
                     }
                 }
             }
 
-            br.close();
-
-            long endTime = System.nanoTime();
-            double elapsedTimeInSeconds = (endTime - startTime) / 1e9; // Tempo em segundos
-
-            System.out.println("Pesquisa Binária:");
-            System.out.println("Total de palavras distintas no arquivo: " + words.size());
-            System.out.println("Tempo de pesquisa (segundos): " + elapsedTimeInSeconds);
-            System.out.println("Número de comparações: " + comparisons);
-
-            for (String word : words.getWords()) {
-                System.out.println(word + ": " + words.getFrequency(word));
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void insercaoBinaria(String pog) {
-        long startTime = System.nanoTime(); // Para medir o tempo de pesquisa
-        int comparisons = 0; // Contador de comparações
-
-        try {
-             // Substitua pelo nome do seu arquivo de texto
-            BufferedReader br = new BufferedReader(new FileReader(pog));
-
             DynamicArray words = new DynamicArray();
 
             String line;
             while ((line = br.readLine()) != null) {
-                String[] lineWords = line.split("\\s+"); // Divide a linha em palavras
+                String[] lineWords = line.split("\\s+");
                 for (String word : lineWords) {
                     String cleanedWord = word.toLowerCase().replaceAll("[^a-zA-ZÀ-ÿ\\s]", " ").toLowerCase(); // Limpa a palavra
                     if (!cleanedWord.isEmpty()) {
                         int index = words.binarySearch(cleanedWord);
-                        comparisons++;
+
                         if (index < 0) {
-                            words.insert(-index - 1, cleanedWord); // Insere a palavra no vetor ordenado
+                            comparisons++;
+                            if (!stopWords.contains(cleanedWord.toLowerCase())) {
+                                words.insert(-index - 1, cleanedWord);
+                            }
                         }
                     }
                 }
@@ -90,9 +64,70 @@ public class InsercaoBinaria {
 //            for (String word : words.getWords()) {
 //                System.out.println(word + ": " + words.getFrequency(word));
 //            }
-
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void insercaoBinaria(String pog) {
+        long startTime = System.nanoTime();
+        int comparisons = 0;
+        String stopWord = "./src/arvores/suporte/stopwords.txt";
+        ArrayList<String> stopWords = new ArrayList<>();
+        try {
+
+            BufferedReader br = new BufferedReader(new FileReader(pog));
+            BufferedReader leitor2 = new BufferedReader(new FileReader(stopWord));
+            String linhaPrincipal;
+
+            while ((linhaPrincipal = leitor2.readLine()) != null) {
+                String[] palavrasLinha = linhaPrincipal.split("\\s+");
+                for (String palavra : palavrasLinha) {
+                    palavra = palavra.replaceAll("[^a-zA-Z]", "");
+                    if (!palavra.isEmpty()) {
+                        stopWords.add(palavra.toLowerCase());
+                    }
+                }
+            }
+
+            DynamicArray words = new DynamicArray();
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] lineWords = line.split("\\s+"); // Divide a linha em palavras
+                for (String word : lineWords) {
+                    String cleanedWord = word.toLowerCase().replaceAll("[^a-zA-ZÀ-ÿ\\s]", " ").toLowerCase(); // Limpa a palavra
+                    if (!cleanedWord.isEmpty()) {
+                        int index = words.binarySearch(cleanedWord);
+
+                        if (index < 0) {
+                            comparisons++;
+                            if (!stopWords.contains(cleanedWord.toLowerCase())) {
+                                words.insert(-index - 1, cleanedWord);
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            br.close();
+
+            long endTime = System.nanoTime();
+            double elapsedTimeInSeconds = (endTime - startTime) / 1e9; // Tempo em segundos
+
+            System.out.println("Pesquisa Binaria:");
+            System.out.println("Total de palavras distintas no arquivo: " + words.size());
+            System.out.println("Tempo de pesquisa (segundos): " + elapsedTimeInSeconds);
+            System.out.println("Numero de comparacoes: " + comparisons);
+
+//            bagulho para mostrar a frequência das palavras está com defeito
+//            for (String word : words.getWords()) {
+//                System.out.println(word + ": " + words.getFrequency(word));
+//            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
         }
     }
 }

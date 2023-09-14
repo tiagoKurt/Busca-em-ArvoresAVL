@@ -1,29 +1,28 @@
-package arvores.avl_binaria;
-
+package arvores.imprimirAVL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class ArvoresAVL {
+public class ImprimirArvorePalavras {
     private int contadorDeMovimentos;
     
     private class Node {
-        String value;
+        String word;
         Node left, right;
         int height;
         ArrayList<String> listaDePalavras = new ArrayList<>();
 
-        Node(String value) {
-            this.value = value;
+        Node(String word) {
+            this.word = word;
             height = 1;
         }
     }
 
     private Node root;
 
-    public void insert(String value) {
-        root = insert(root, value);
+    public void insert(String word) {
+        root = insert(root, word);
     }
 
     public ArrayList<String> getListaPelaPalavra(String palavra) {
@@ -88,27 +87,30 @@ public class ArvoresAVL {
         if (node == null) {
             return null;
         }
-        if (node.value.equals(value)) {
+        if (node.word.equals(value)) {
             return node;
         }
-        if (value.compareTo(node.value) < 0) {
+        if (value.compareTo(node.word) < 0) {
             return find(node.left, value);
         } else {
             return find(node.right, value);
         }
     }
 
-    private Node insert(Node node, String value) {
+    private Node insert(Node node, String word) {
         if (node == null) {
-            return new Node(value);
-
+            Node newNode = new Node(word);
+            newNode.listaDePalavras.add(word);
+            return newNode;
         }
 
-        if (value.compareTo(node.value) < 0) {
-            node.left = insert(node.left, value);
-        } else if (value.compareTo(node.value) > 0) {
-            node.right = insert(node.right, value);
+        if (word.compareTo(node.word) < 0) {
+            node.left = insert(node.left, word);
+        } else if (word.compareTo(node.word) > 0) {
+            node.right = insert(node.right, word);
         } else {
+        
+            node.listaDePalavras.add(word);
             return node;
         }
 
@@ -116,20 +118,20 @@ public class ArvoresAVL {
 
         int balance = getBalance(node);
 
-        if (balance > 1 && value.compareTo(node.left.value) < 0) {
+        if (balance > 1 && word.compareTo(node.left.word) < 0) {
             return rightRotate(node);
         }
 
-        if (balance < -1 && value.compareTo(node.right.value) > 0) {
+        if (balance < -1 && word.compareTo(node.right.word) > 0) {
             return leftRotate(node);
         }
 
-        if (balance > 1 && value.compareTo(node.left.value) > 0) {
+        if (balance > 1 && word.compareTo(node.left.word) > 0) {
             node.left = leftRotate(node.left);
             return rightRotate(node);
         }
 
-        if (balance < -1 && value.compareTo(node.right.value) < 0) {
+        if (balance < -1 && word.compareTo(node.right.word) < 0) {
             node.right = rightRotate(node.right);
             return leftRotate(node);
         }
@@ -182,38 +184,37 @@ public class ArvoresAVL {
             return null;
         }
 
-        // Encontra o nó a ser excluído
-        int cmp = value.compareTo(node.value);
+        
+        int cmp = value.compareTo(node.word);
         if (cmp < 0) {
             node.left = delete(node.left, value);
         } else if (cmp > 0) {
             node.right = delete(node.right, value);
-        } else { // O nó atual é o nó a ser excluído
-            // Caso 1: o nó a ser excluído é uma folha
+        } else { 
             if (node.left == null && node.right == null) {
                 node = null;
             }
-            // Caso 2: o nó a ser excluído tem apenas um filho
+           
             else if (node.left == null) {
                 node = node.right;
             } else if (node.right == null) {
                 node = node.left;
             }
-            // Caso 3: o nó a ser excluído tem dois filhos
+           
             else {
-                // Encontra o sucessor (menor valor na subárvore direita)
+               
                 Node successor = node.right;
                 while (successor.left != null) {
                     successor = successor.left;
                 }
-                // Copia o valor do sucessor para o nó atual
-                node.value = successor.value;
-                // Remove o sucessor
-                node.right = delete(node.right, successor.value);
+                
+                node.word = successor.word;
+               
+                node.right = delete(node.right, successor.word);
             }
         }
 
-        // Reequilibra a árvore após a exclusão
+       
         return balance(node);
     }
 
@@ -226,38 +227,37 @@ public class ArvoresAVL {
             return null;
         }
 
-        // Calcula o fator de balanceamento do nó atual
+        
         int balanceFactor = balanceFactor(node);
 
-        // Caso 1: o nó está desbalanceado para a esquerda
+        
         if (balanceFactor > 1) {
-            // Verifica se é uma rotação simples ou dupla
+           
             if (balanceFactor(node.left) < 0) {
                 node.left = leftRotate(node.left);
             }
             return rightRotate(node);
         }
-        // Caso 2: o nó está desbalanceado para a direita
+       
         else if (balanceFactor < -1) {
-            // Verifica se é uma rotação simples ou dupla
+           
             if (balanceFactor(node.right) > 0) {
                 node.right = rightRotate(node.right);
             }
             return leftRotate(node);
         }
 
-        // O nó está balanceado
+        
         return node;
     }
-    // Métodos de busca e percurso da árvore (não são necessários para a inserção)
 
     public boolean contains(String value) {
         Node current = root;
 
         while (current != null) {
-            if (value.equals(current.value)) {
+            if (value.equals(current.word)) {
                 return true;
-            } else if (value.compareTo(current.value) < 0) {
+            } else if (value.compareTo(current.word) < 0) {
                 current = current.left;
             } else {
                 current = current.right;
@@ -274,7 +274,7 @@ public class ArvoresAVL {
     private void inOrderTraversal(Node node) {
         if (node != null) {
             inOrderTraversal(node.left);
-            System.out.print(node.value + " ");
+            System.out.print(node.word + " ");
             inOrderTraversal(node.right);
         }
     }
@@ -285,7 +285,7 @@ public class ArvoresAVL {
 
     private void preOrderTraversal(Node node) {
         if (node != null) {
-            System.out.print(node.value + " ");
+            System.out.print(node.word + " ");
             preOrderTraversal(node.left);
             preOrderTraversal(node.right);
         }
@@ -299,7 +299,7 @@ public class ArvoresAVL {
         if (node != null) {
             postOrderTraversal(node.left);
             postOrderTraversal(node.right);
-            System.out.print(node.value + " ");
+            System.out.print(node.word + " ");
         }
     }
 
@@ -312,7 +312,7 @@ public class ArvoresAVL {
 
         while (!queue.isEmpty()) {
             Node node = queue.poll();
-            System.out.print(node.value + " ");
+            System.out.print(node.word + " ");
             if (node.left != null) {
                 queue.offer(node.left);
             }
@@ -332,7 +332,7 @@ public class ArvoresAVL {
                 System.out.print("|--");
                 indent += "| ";
             }
-            System.out.println(node.value);
+            System.out.println(node.word);
 
             printAVLTree(node.left, indent, false);
             printAVLTree(node.right, indent, true);
@@ -343,30 +343,18 @@ public class ArvoresAVL {
         printAVLTree(root, "", true);
     }
 
-    /**
-     * @return int return the contadorDeMovimentos
-     */
     public int getContadorDeMovimentos() {
         return contadorDeMovimentos;
     }
 
-    /**
-     * @param contadorDeMovimentos the contadorDeMovimentos to set
-     */
     public void setContadorDeMovimentos(int contadorDeMovimentos) {
         this.contadorDeMovimentos = contadorDeMovimentos;
     }
 
-    /**
-     * @return Node return the root
-     */
     public Node getRoot() {
         return root;
     }
 
-    /**
-     * @param root the root to set
-     */
     public void setRoot(Node root) {
         this.root = root;
     }
