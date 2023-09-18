@@ -36,7 +36,7 @@ public class InsercaoBinaria {
             while ((line = br.readLine()) != null) {
                 String[] lineWords = line.split("\\s+");
                 for (String word : lineWords) {
-                    String cleanedWord = word.toLowerCase().replaceAll("[^a-zA-ZÀ-ÿ\\s]", " ").toLowerCase(); // Limpa a palavra
+                    String cleanedWord = word.toLowerCase().replaceAll("[^a-zA-ZÀ-ÿ\\s]", " ").toLowerCase();
                     if (!cleanedWord.isEmpty()) {
                         int index = words.binarySearch(cleanedWord);
 
@@ -53,7 +53,7 @@ public class InsercaoBinaria {
             br.close();
 
             long endTime = System.nanoTime();
-            double elapsedTimeInSeconds = (endTime - startTime) / 1e9; // Tempo em segundos
+            double elapsedTimeInSeconds = (endTime - startTime) / 1e9; 
 
             System.out.println("Pesquisa Binaria:");
             System.out.println("Total de palavras distintas no arquivo: " + words.size());
@@ -64,6 +64,7 @@ public class InsercaoBinaria {
 //            for (String word : words.getWords()) {
 //                System.out.println(word + ": " + words.getFrequency(word));
 //            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -94,9 +95,9 @@ public class InsercaoBinaria {
 
             String line;
             while ((line = br.readLine()) != null) {
-                String[] lineWords = line.split("\\s+"); // Divide a linha em palavras
+                String[] lineWords = line.split("\\s+");
                 for (String word : lineWords) {
-                    String cleanedWord = word.toLowerCase().replaceAll("[^a-zA-ZÀ-ÿ\\s]", " ").toLowerCase(); // Limpa a palavra
+                    String cleanedWord = word.toLowerCase().replaceAll("[^a-zA-ZÀ-ÿ\\s]", " ").toLowerCase();
                     if (!cleanedWord.isEmpty()) {
                         int index = words.binarySearch(cleanedWord);
 
@@ -114,7 +115,7 @@ public class InsercaoBinaria {
             br.close();
 
             long endTime = System.nanoTime();
-            double elapsedTimeInSeconds = (endTime - startTime) / 1e9; // Tempo em segundos
+            double elapsedTimeInSeconds = (endTime - startTime) / 1e9;
 
             System.out.println("Pesquisa Binaria:");
             System.out.println("Total de palavras distintas no arquivo: " + words.size());
@@ -125,6 +126,7 @@ public class InsercaoBinaria {
 //            for (String word : words.getWords()) {
 //                System.out.println(word + ": " + words.getFrequency(word));
 //            }
+
         } catch (IOException e) {
             e.printStackTrace();
 
