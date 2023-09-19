@@ -1,12 +1,14 @@
 package arvores.visao;
 
 import arvores.Arvore_semAVL.main_TreeBinaria;
+import arvores.arvore_avl.Visao;
 import arvores.avl_binaria.ArvoresAVL;
 import arvores.avl_binaria.FreqPalavras;
 import arvores.avl_binaria.FrequenciaGeral;
 import arvores.avl_binaria.InsercaoBinaria;
 import arvores.buscarBinaria.buscaBinaria;
 import arvores.imprimirAVL.mainArvorePalavras;
+import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.TextArea;
@@ -24,7 +26,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 public class principal extends javax.swing.JFrame {
-
+    int tamanhoFonte = 18;
     public principal() {
         initComponents();
 
@@ -47,6 +49,8 @@ public class principal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton1_binaria = new javax.swing.JButton();
+        menos = new javax.swing.JButton();
+        mais = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1_saidaArvores = new javax.swing.JTextArea();
         jButton1_avl = new javax.swing.JButton();
@@ -106,10 +110,28 @@ public class principal extends javax.swing.JFrame {
         });
         jFrame1_avancar.getContentPane().add(jButton1_binaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 240, 160, 40));
 
+        menos.setText("jButton1");
+        menos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menosActionPerformed(evt);
+            }
+        });
+        jFrame1_avancar.getContentPane().add(menos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, -1, -1));
+
+        mais.setText("jButton1");
+        mais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maisActionPerformed(evt);
+            }
+        });
+        jFrame1_avancar.getContentPane().add(mais, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
+
         jTextArea1_saidaArvores.setColumns(20);
         jTextArea1_saidaArvores.setFont(new java.awt.Font("Serif", 3, 18)); // NOI18N
         jTextArea1_saidaArvores.setRows(5);
         jTextArea1_saidaArvores.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3), "SAÍDA", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Serif", 3, 24))); // NOI18N
+        jTextArea1_saidaArvores.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextArea1_saidaArvores.setEnabled(false);
         jScrollPane1.setViewportView(jTextArea1_saidaArvores);
 
         jFrame1_avancar.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 670, 370));
@@ -320,7 +342,7 @@ public class principal extends javax.swing.JFrame {
     private void jButton1_avlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_avlActionPerformed
         try {
             jTextArea1_saidaArvores.setText("");
-            mainArvorePalavras arvoreAVL = new mainArvorePalavras();
+            Visao arvoreAVL = new Visao();
 
             String caminhoCompleto = jTextField1_aux.getText();
             String caminhoDesejado = "src";
@@ -332,12 +354,7 @@ public class principal extends javax.swing.JFrame {
             }
             PrintStream printStream = new PrintStream(new TextAreaOutputStream(jTextArea1_saidaArvores));
             System.setOut(printStream);
-            arvoreAVL.ImprimirArvoreTela(caminhoCortado);
-
-            principalTerminal procuraArvoreAvl = new principalTerminal();
-
-            procuraArvoreAvl.AdiconarArvoreAVL(caminhoCortado);
-
+            arvoreAVL.mostrarArvore(caminhoCortado);
         } catch (IOException ex) {
             Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -357,14 +374,15 @@ public class principal extends javax.swing.JFrame {
                 caminhoCortado = caminhoCompleto.substring(startIndex);
             }
             PrintStream printStream = new PrintStream(new TextAreaOutputStream(jTextArea1_saidaArvores));
-//            System.setOut(printStream);
-//            oMeuDeus.insercaoBinaria(caminhoCortado);
+            System.setOut(printStream);
+            oMeuDeus.insercaoBinaria(caminhoCortado);
             buscaBinaria binaria = new buscaBinaria();
             binaria.resumoGeral(caminhoCortado);
 
             System.out.println("------------------------------------------------------------------------------------------------------------");
-//            principalTerminal resumoArvoreAVL = new principalTerminal();
-//            resumoArvoreAVL.resumoGeral(caminhoCortado);
+                System.out.println("Arvore AVL");
+                Visao resumoArvoreAVL = new Visao();
+                resumoArvoreAVL.resumoArvoreAvl(caminhoCortado);
             System.out.println("------------------------------------------------------------------------------------------------------------");
 
             main_TreeBinaria arvoreBinaria = new main_TreeBinaria();
@@ -397,6 +415,17 @@ public class principal extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton1_avl1ActionPerformed
+
+    private void menosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menosActionPerformed
+        
+        Font fontePersonalizada = new Font("Serif", Font.BOLD | Font.ITALIC, tamanhoFonte--);
+        jTextArea1_saidaArvores.setFont(fontePersonalizada);
+    }//GEN-LAST:event_menosActionPerformed
+
+    private void maisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maisActionPerformed
+ Font fontePersonalizada = new Font("Serif", Font.BOLD | Font.ITALIC, tamanhoFonte++);
+        jTextArea1_saidaArvores.setFont(fontePersonalizada);
+    }//GEN-LAST:event_maisActionPerformed
 
     public class TextAreaOutputStream extends OutputStream {
 
@@ -485,5 +514,7 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1_saidaArvores;
     private javax.swing.JTextField jTextField1_aux;
     private javax.swing.JTextField jTextField1_nomeDoArquivo;
+    private javax.swing.JButton mais;
+    private javax.swing.JButton menos;
     // End of variables declaration//GEN-END:variables
 }
