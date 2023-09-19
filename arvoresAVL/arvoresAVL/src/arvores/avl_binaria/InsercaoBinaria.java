@@ -202,7 +202,7 @@ class DynamicArray {
     public String[] getWords() {
         return data;
     }
-
+    
     public int binarySearch(String word) {
         int low = 0;
         int high = size - 1;
@@ -219,7 +219,6 @@ class DynamicArray {
                 return mid;
             }
         }
-
         return -(low + 1);
     }
 }

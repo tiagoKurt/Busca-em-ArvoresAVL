@@ -21,7 +21,6 @@ class AVLTree {
 
     TreeNode root;
 
-    // Função auxiliar para obter a altura de um nó
     private int height(TreeNode node) {
         if (node == null) {
             return 0;
@@ -29,7 +28,6 @@ class AVLTree {
         return Math.max(height(node.left), height(node.right)) + 1;
     }
 
-    // Função auxiliar para calcular o fator de balanceamento de um nó
     private int getBalance(TreeNode node) {
         if (node == null) {
             return 0;
@@ -37,7 +35,6 @@ class AVLTree {
         return height(node.left) - height(node.right);
     }
 
-    // Rotação à direita em torno de um nó
     private TreeNode rightRotate(TreeNode y) {
         TreeNode x = y.left;
         TreeNode T2 = x.right;
@@ -48,7 +45,6 @@ class AVLTree {
         return x;
     }
 
-    // Rotação à esquerda em torno de um nó
     private TreeNode leftRotate(TreeNode x) {
         TreeNode y = x.right;
         TreeNode T2 = y.left;
@@ -59,7 +55,6 @@ class AVLTree {
         return y;
     }
 
-    // Inserir uma palavra na árvore AVL
     public TreeNode insert(TreeNode node, String word) {
         if (node == null) {
             return new TreeNode(word);
@@ -77,7 +72,6 @@ class AVLTree {
 
         int balance = getBalance(node);
 
-        // Rotações para balancear a árvore
         if (balance > 1 && word.compareTo(node.left.word) < 0) {
             return rightRotate(node);
         }
@@ -96,12 +90,10 @@ class AVLTree {
         return node;
     }
 
-    // Função para inserir uma palavra na árvore AVL
     public void insert(String word) {
         root = insert(root, word);
     }
 
-    // Função para buscar uma palavra na árvore AVL
     public TreeNode search(String word) {
         return search(root, word);
     }
@@ -126,67 +118,53 @@ class AVLTree {
 public class ArvoreImplement {
 
     public static void main(String[] args) {
-        // Exemplo de texto
         String text = "Esta é uma implementação de exemplo em Java para contar a frequência de palavras em uma estrutura de dados.";
 
-        // Dividir o texto em palavras
         String[] words = text.split("\\s+");
 
-        // Usar uma lista para a Busca Binária
         List<String> binarySearchList = new ArrayList<>();
 
-        // Usar uma árvore binária de pesquisa sem balanceamento
         TreeNode bstRoot = null;
 
-        // Usar uma árvore AVL para balanceamento
         AVLTree avlTree = new AVLTree();
 
-        // Contadores para comparações e atribuições
         int binarySearchComparisons = 0;
         int bstComparisons = 0;
         int avlComparisons = 0;
 
         long startTime, endTime;
 
-        // Iniciar contagem de tempo para a Busca Binária
         startTime = System.nanoTime();
 
         for (String word : words) {
             int index = Collections.binarySearch(binarySearchList, word);
             if (index >= 0) {
-                // A palavra já existe na lista, incrementar o contador
                 binarySearchComparisons++;
             } else {
-                // A palavra não existe na lista, inserir na posição correta
                 int insertionPoint = -(index + 1);
                 binarySearchList.add(insertionPoint, word);
                 binarySearchComparisons += insertionPoint + 1;
             }
         }
 
-        // Encerrar contagem de tempo para a Busca Binária
         endTime = System.nanoTime();
         long binarySearchTime = endTime - startTime;
 
-        // Iniciar contagem de tempo para a Árvore Binária de Pesquisa sem balanceamento
         startTime = System.nanoTime();
 
         for (String word : words) {
             bstRoot = insertIntoBST(bstRoot, word);
         }
 
-        // Encerrar contagem de tempo para a Árvore Binária de Pesquisa sem balanceamento
         endTime = System.nanoTime();
         long bstTime = endTime - startTime;
         
-        // Iniciar contagem de tempo para a Árvore AVL
         startTime = System.nanoTime();
 
         for (String word : words) {
             avlTree.insert(word);
         }
 
-        // Encerrar contagem de tempo para a Árvore AVL
         endTime = System.nanoTime();
         long avlTime = endTime - startTime;
         double segundos = TimeUnit.SECONDS.convert(binarySearchTime, TimeUnit.NANOSECONDS);
@@ -204,7 +182,6 @@ public class ArvoreImplement {
         printAVL(bstRoot);
     }
 
-    // Função para inserir uma palavra na Árvore Binária de Pesquisa sem balanceamento
     private static TreeNode insertIntoBST(TreeNode root, String word) {
         if (root == null) {
             return new TreeNode(word);
@@ -223,7 +200,6 @@ public class ArvoreImplement {
         return root;
     }
 
-    // Função para imprimir a tabela de frequências da Árvore Binária de Pesquisa sem balanceamento
     private static void printBST(TreeNode root) {
         if (root != null) {
             printBST(root.left);
@@ -232,7 +208,6 @@ public class ArvoreImplement {
         }
     }
 
-    // Função para imprimir a tabela de frequências da Árvore AVL
     private static void printAVL(TreeNode root) {
         if (root != null) {
             printAVL(root.left);

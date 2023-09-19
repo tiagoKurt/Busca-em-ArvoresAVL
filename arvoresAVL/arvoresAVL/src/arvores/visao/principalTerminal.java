@@ -127,7 +127,7 @@ public class principalTerminal {
             for (int i = 0; i < buscador.size(); i++) {
                 if (arvore.binarySearch(buscador.get(i)) != -1) {
                     System.out.println(
-                            "A palavra: '" + buscador.get(i) + "'  foi achada na posicao: " + i);
+                            "A palavra: '" + buscador.get(i) + "'  foi encontrada na posicao: " + i);
 
                 } else {
                     System.out.println("A palavra: " + buscador.get(i) + ", não foi encontrada!");
