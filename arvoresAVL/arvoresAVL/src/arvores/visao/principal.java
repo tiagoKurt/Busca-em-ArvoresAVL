@@ -10,6 +10,8 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.TextArea;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -379,15 +381,15 @@ public class principal extends javax.swing.JFrame {
             }
             PrintStream printStream = new PrintStream(new TextAreaOutputStream(jTextArea1_saidaArvores));
             System.setOut(printStream);
-            
+
             oMeuDeus.insercaoBinaria(caminhoCortado);
             System.out.println("------------------------------------------------------------------------------------------------------------");
-            
+
             buscaBinaria_main binaria = new buscaBinaria_main();
             binaria.resumoGeral(caminhoCortado);
 
             System.out.println("------------------------------------------------------------------------------------------------------------");
-            
+
             System.out.println("Arvore AVL");
             Visao resumoArvoreAVL = new Visao();
             resumoArvoreAVL.resumoArvoreAvl(caminhoCortado);
@@ -427,13 +429,19 @@ public class principal extends javax.swing.JFrame {
 
     private void menosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menosActionPerformed
 
-        Font fontePersonalizada = new Font("Serif", Font.BOLD | Font.ITALIC, tamanhoFonte--);
+        tamanhoFonte--;
+        Font fontePersonalizada = new Font("Serif", Font.BOLD | Font.ITALIC, tamanhoFonte);
         jTextArea1_saidaArvores.setFont(fontePersonalizada);
+
+
     }//GEN-LAST:event_menosActionPerformed
 
     private void maisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maisActionPerformed
-        Font fontePersonalizada = new Font("Serif", Font.BOLD | Font.ITALIC, tamanhoFonte++);
+        
+        tamanhoFonte++;
+        Font fontePersonalizada = new Font("Serif", Font.BOLD | Font.ITALIC, tamanhoFonte);
         jTextArea1_saidaArvores.setFont(fontePersonalizada);
+
     }//GEN-LAST:event_maisActionPerformed
 
     public class TextAreaOutputStream extends OutputStream {
