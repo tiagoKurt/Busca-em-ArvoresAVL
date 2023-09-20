@@ -44,7 +44,6 @@ class BinaryTree {
         } else if (compareResult > 0) {
             root.right = insertRec(root.right, data, position);
         } else {
-            // Caso a palavra já exista, apenas adicione a posição.
             root.listaDePosicoes.add(position);
         }
 

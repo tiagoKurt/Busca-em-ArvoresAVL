@@ -91,7 +91,6 @@ public class main_TreeBinaria {
             br.close();
             
             tree.printTree();
-            tree.inOrder();
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -136,7 +135,7 @@ public class main_TreeBinaria {
             double tempoConvertido = (endTime - startTime) / 1e9; 
             
             System.out.println("Arvore Binaria");
-            System.out.println("Tempo de pesquisa (segundos): " + tempoConvertido);
+            System.out.println("Tempo de pesquisa: " + tempoConvertido + " segundos");
             System.out.println("Comparacoes: " + tree.getComparisons());
         } catch (IOException e) {
             e.printStackTrace();

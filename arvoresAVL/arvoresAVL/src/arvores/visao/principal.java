@@ -2,11 +2,9 @@ package arvores.visao;
 
 import arvores.Arvore_semAVL.main_TreeBinaria;
 import arvores.arvore_avl.Visao;
-import arvores.avl_binaria.ArvoresAVL;
-import arvores.avl_binaria.FreqPalavras;
-import arvores.avl_binaria.FrequenciaGeral;
-import arvores.avl_binaria.InsercaoBinaria;
-import arvores.buscarBinaria.buscaBinaria;
+import arvores.frequencia.FrequenciaGeral;
+import arvores.arrayDinamico.InsercaoBinaria;
+import arvores.buscarBinaria.buscaBinaria_main;
 import arvores.imprimirAVL.mainArvorePalavras;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
@@ -26,7 +24,9 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 public class principal extends javax.swing.JFrame {
+
     int tamanhoFonte = 18;
+
     public principal() {
         initComponents();
 
@@ -110,21 +110,25 @@ public class principal extends javax.swing.JFrame {
         });
         jFrame1_avancar.getContentPane().add(jButton1_binaria, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 240, 160, 40));
 
-        menos.setText("jButton1");
+        menos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arvores/icons/zoom-out.png"))); // NOI18N
+        menos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        menos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menosActionPerformed(evt);
             }
         });
-        jFrame1_avancar.getContentPane().add(menos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, -1, -1));
+        jFrame1_avancar.getContentPane().add(menos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 35, 35));
 
-        mais.setText("jButton1");
+        mais.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arvores/icons/zoom-in.png"))); // NOI18N
+        mais.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        mais.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 maisActionPerformed(evt);
             }
         });
-        jFrame1_avancar.getContentPane().add(mais, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
+        jFrame1_avancar.getContentPane().add(mais, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 35, 35));
 
         jTextArea1_saidaArvores.setColumns(20);
         jTextArea1_saidaArvores.setFont(new java.awt.Font("Serif", 3, 18)); // NOI18N
@@ -302,7 +306,7 @@ public class principal extends javax.swing.JFrame {
     private void jButton1_frequencia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_frequencia1ActionPerformed
         try {
             jTextArea1_saidaArvores.setText("");
-            FrequenciaGeral pog = new FrequenciaGeral();
+            FrequenciaGeral frequencia = new FrequenciaGeral();
 
             String caminhoCortado = "";
             String caminhoCompleto = jTextField1_aux.getText();
@@ -316,7 +320,7 @@ public class principal extends javax.swing.JFrame {
 
             PrintStream printStream = new PrintStream(new TextAreaOutputStream(jTextArea1_saidaArvores));
             System.setOut(printStream);
-            pog.frequenciaPalavras(caminhoCortado);
+            frequencia.resumoGeral(caminhoCortado);
         } catch (IOException ex) {
             Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -334,8 +338,8 @@ public class principal extends javax.swing.JFrame {
         }
         PrintStream printStream = new PrintStream(new TextAreaOutputStream(jTextArea1_saidaArvores));
         System.setOut(printStream);
-        
-        buscaBinaria binaria = new buscaBinaria();
+
+        buscaBinaria_main binaria = new buscaBinaria_main();
         binaria.resumoGeral(caminhoCortado);
     }//GEN-LAST:event_jButton1_binariaActionPerformed
 
@@ -375,14 +379,19 @@ public class principal extends javax.swing.JFrame {
             }
             PrintStream printStream = new PrintStream(new TextAreaOutputStream(jTextArea1_saidaArvores));
             System.setOut(printStream);
+            
             oMeuDeus.insercaoBinaria(caminhoCortado);
-            buscaBinaria binaria = new buscaBinaria();
+            System.out.println("------------------------------------------------------------------------------------------------------------");
+            
+            buscaBinaria_main binaria = new buscaBinaria_main();
             binaria.resumoGeral(caminhoCortado);
 
             System.out.println("------------------------------------------------------------------------------------------------------------");
-                System.out.println("Arvore AVL");
-                Visao resumoArvoreAVL = new Visao();
-                resumoArvoreAVL.resumoArvoreAvl(caminhoCortado);
+            
+            System.out.println("Arvore AVL");
+            Visao resumoArvoreAVL = new Visao();
+            resumoArvoreAVL.resumoArvoreAvl(caminhoCortado);
+
             System.out.println("------------------------------------------------------------------------------------------------------------");
 
             main_TreeBinaria arvoreBinaria = new main_TreeBinaria();
@@ -417,13 +426,13 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1_avl1ActionPerformed
 
     private void menosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menosActionPerformed
-        
+
         Font fontePersonalizada = new Font("Serif", Font.BOLD | Font.ITALIC, tamanhoFonte--);
         jTextArea1_saidaArvores.setFont(fontePersonalizada);
     }//GEN-LAST:event_menosActionPerformed
 
     private void maisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maisActionPerformed
- Font fontePersonalizada = new Font("Serif", Font.BOLD | Font.ITALIC, tamanhoFonte++);
+        Font fontePersonalizada = new Font("Serif", Font.BOLD | Font.ITALIC, tamanhoFonte++);
         jTextArea1_saidaArvores.setFont(fontePersonalizada);
     }//GEN-LAST:event_maisActionPerformed
 

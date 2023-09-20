@@ -80,7 +80,7 @@ public class Visao {
         }
         long endTime = System.nanoTime();
         double tempoConvertido = (endTime - startTime) / 1e9; 
-        System.out.println("Tempo Gasto: "+ tempoConvertido);
+        System.out.println("Tempo de pesquisa: "+ tempoConvertido + " segundos");
         System.out.println("Comparacoes: " + arvore.getContadorDeMovimentos());
         
     }

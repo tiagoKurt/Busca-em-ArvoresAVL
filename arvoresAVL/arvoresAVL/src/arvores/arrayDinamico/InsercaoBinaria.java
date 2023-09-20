@@ -1,4 +1,4 @@
-package arvores.avl_binaria;
+package arvores.arrayDinamico;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -117,8 +117,7 @@ public class InsercaoBinaria {
             long endTime = System.nanoTime();
             double elapsedTimeInSeconds = (endTime - startTime) / 1e9;
 
-            System.out.println("Pesquisa Binaria:");
-            System.out.println("Total de palavras distintas no arquivo: " + words.size());
+            System.out.println("Array Dinamico:");
             System.out.println("Tempo de pesquisa (segundos): " + elapsedTimeInSeconds);
             System.out.println("Numero de comparacoes: " + comparisons);
 
