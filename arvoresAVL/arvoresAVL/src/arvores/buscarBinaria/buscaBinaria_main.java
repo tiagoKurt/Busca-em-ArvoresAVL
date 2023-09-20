@@ -9,7 +9,7 @@ import static arvores.buscarBinaria.buscaBinaria.updateFrequencyTable;
 
 public class buscaBinaria_main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ArrayList<String> words = new ArrayList<>();
         ArrayList<WordFrequency> frequencyTable = new ArrayList<>();
         int comparisons = 0;
@@ -35,23 +35,25 @@ public class buscaBinaria_main {
 
             String line;
 
-            startTime = System.nanoTime();
             while ((line = br.readLine()) != null) {
-                String[] lineWords = line.split("\\s+"); 
+                String[] lineWords = line.split("\\s+");
                 for (String word : lineWords) {
                     word = word.replaceAll("[^a-zA-Z]", "");
                     if (!word.isEmpty()) {
                         if (!stopWords.contains(word.toLowerCase())) {
-                            insertWordInSortedArray(words, word);
+                        words.add(word);
+                        System.out.println("Parou");
                         }
                     }
                 }
             }
-
+            startTime = System.nanoTime();
+            System.out.println("saiu");
+            buscaBinaria.mergeSort(words);
             br.close();
 
             for (String word : words) {
-                int position = binarySearch(words, word);
+                int position = buscaBinaria.binarySearch(words, word);
                 if (position >= 0) {
                     updateFrequencyTable(frequencyTable, word);
                 }
@@ -98,23 +100,25 @@ public class buscaBinaria_main {
             String line;
 
             while ((line = br.readLine()) != null) {
-                String[] lineWords = line.split("\\s+"); 
+                String[] lineWords = line.split("\\s+");
                 for (String word : lineWords) {
 
                     word = word.replaceAll("[^a-zA-Z]", "");
 
                     if (!word.isEmpty()) {
                         if (!stopWords.contains(word.toLowerCase())) {
-                            insertWordInSortedArray(words, word);
+                            words.add(word);
+
                         }
                     }
                 }
             }
-
+            startTime = System.nanoTime();
+            buscaBinaria.mergeSort(words);
             br.close();
 
             for (String word : words) {
-                int position = binarySearch(words, word);
+                int position = buscaBinaria.binarySearch(words, word);
                 if (position >= 0) {
                     updateFrequencyTable(frequencyTable, word);
                 }
@@ -122,36 +126,14 @@ public class buscaBinaria_main {
             }
 
             long endTime = System.nanoTime();
-            double tempoConvertido = (endTime - startTime) / 1e9; 
+            double executionTime = (endTime - startTime) / 1e9;
 
             System.out.println("Busca Binaria");
-            System.out.println("Tempo de pesquisa: " + tempoConvertido + " segundos");
+            System.out.println("Tempo de pesquisa(segundos): " + executionTime + " segundos");
             System.out.println("Comparacoes: " + comparisons);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    public static int binarySearch(ArrayList<String> list, String word) {
-        int left = 0;
-        int right = list.size() - 1;
-
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            int cmp = word.compareTo(list.get(mid));
-
-            if (cmp == 0) {
-                return mid;
-            } else if (cmp < 0) {
-                right = mid - 1;
-            } else {
-                left = mid + 1;
-            }
-        }
-
-        return -1;
-    }
 }
-
-    

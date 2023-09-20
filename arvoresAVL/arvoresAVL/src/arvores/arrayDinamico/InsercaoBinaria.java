@@ -60,7 +60,7 @@ public class InsercaoBinaria {
             System.out.println("Tempo de pesquisa (segundos): " + elapsedTimeInSeconds);
             System.out.println("Numero de comparacoes: " + comparisons);
 
-//            bagulho para mostrar a frequência das palavras está com defeito
+//            mostrar a frequência das palavras está com defeito
 //            for (String word : words.getWords()) {
 //                System.out.println(word + ": " + words.getFrequency(word));
 //            }
@@ -121,7 +121,7 @@ public class InsercaoBinaria {
             System.out.println("Tempo de pesquisa (segundos): " + elapsedTimeInSeconds);
             System.out.println("Numero de comparacoes: " + comparisons);
 
-//            bagulho para mostrar a frequência das palavras está com defeito
+//            mostrar a frequência das palavras está com defeito
 //            for (String word : words.getWords()) {
 //                System.out.println(word + ": " + words.getFrequency(word));
 //            }

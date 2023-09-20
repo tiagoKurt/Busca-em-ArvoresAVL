@@ -229,7 +229,4 @@ public class ArvoreAvl {
     public void printAVLTree() {
         printAVLTree(root, "", true);
     }
-
-
-    // Resto do código permanece o mesmo
 }
