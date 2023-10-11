@@ -11,7 +11,6 @@ enum Color {
 }
 
 class Node {
-
     String data;
     Node parent;
     Node left;
@@ -19,23 +18,20 @@ class Node {
     Color color;
 }
 
-public class RubroNegra {
-
+public class imprimirArvore {
     private Node root;
     private Node TNULL;
-    private int comparisons;
 
-    public RubroNegra() {
+    public imprimirArvore() {
         TNULL = new Node();
         TNULL.color = Color.BLACK;
         TNULL.left = null;
         TNULL.right = null;
         root = TNULL;
-        comparisons = 0;
     }
 
     // Métodos de árvore rubro-negra
-    // Inserção
+
     public void insert(String key) {
         Node node = new Node();
         node.parent = null;
@@ -50,7 +46,6 @@ public class RubroNegra {
         while (x != TNULL) {
             y = x;
             int cmp = key.compareTo(x.data);
-            comparisons++;
             if (cmp < 0) {
                 x = x.left;
             } else {
@@ -70,7 +65,7 @@ public class RubroNegra {
             }
         }
 
-        if (node.parent == null) {
+        if (node.parent == null){
             node.color = Color.BLACK;
             return;
         }
@@ -82,7 +77,6 @@ public class RubroNegra {
         fixInsert(node);
     }
 
-    // Rotação à esquerda
     private void leftRotate(Node x) {
         Node y = x.right;
         x.right = y.left;
@@ -101,7 +95,6 @@ public class RubroNegra {
         x.parent = y;
     }
 
-    // Rotação à direita
     private void rightRotate(Node x) {
         Node y = x.left;
         x.left = y.right;
@@ -120,7 +113,6 @@ public class RubroNegra {
         x.parent = y;
     }
 
-    // Balanceamento
     private void fixInsert(Node k) {
         Node u;
         while (k.parent.color == Color.RED) {
@@ -174,7 +166,6 @@ public class RubroNegra {
             return false;
         }
         int cmp = key.compareTo(node.data);
-        comparisons++;
         if (cmp == 0) {
             return true;
         } else if (cmp < 0) {
@@ -184,44 +175,7 @@ public class RubroNegra {
         }
     }
 
-    // Outros métodos da árvore rubro-negra
-    // Método para contar comparações
-    public int getComparisonCount() {
-        return comparisons;
-    }
-
-    public static RubroNegra MakeArvoreArquivo(String arquivo) throws IOException {
-        String line;
-        RubroNegra rbt = new RubroNegra();
-        String stopWord = "./src/arvores/suporte/stopwords.txt";
-        ArrayList<String> stopWords = new ArrayList<>();
-        BufferedReader leitor2 = new BufferedReader(new FileReader(stopWord));
-        String linhaPrincipal;
-        while ((linhaPrincipal = leitor2.readLine()) != null) {
-            String[] palavrasLinha = linhaPrincipal.split("\\s+");
-            for (String palavra : palavrasLinha) {
-                palavra = palavra.replaceAll("[^a-zA-Z]", "");
-                if (!palavra.isEmpty()) {
-                    stopWords.add(palavra.toLowerCase());
-                }
-            }
-        }
-        BufferedReader br = new BufferedReader(new FileReader(arquivo));
-        
-        while ((line = br.readLine()) != null) {
-                String[] words = line.split(" ");
-                for (String word : words) {
-                    if (!stopWords.contains(word.toLowerCase())) {
-                        rbt.insert(line);
-                    }
-                }
-            }
-        
-        br.close();
-//        rbt.printTree();
-        return rbt;
-    }
-
+    // Impressão da árvore com cores
     public void printTree() {
         printTree(root, 0);
     }
@@ -233,43 +187,37 @@ public class RubroNegra {
 
         printTree(node.right, level + 1);
         for (int i = 0; i < level; i++) {
-            System.out.print(" ");
+            System.out.print("   ");
         }
         System.out.println(node.data + " (" + node.color + ")");
         printTree(node.left, level + 1);
     }
-    
+
+    public static imprimirArvore buildTreeFromFile(String filename) throws IOException {
+        imprimirArvore rbt = new imprimirArvore();
+        BufferedReader br = new BufferedReader(new FileReader(filename));
+        String line;
+        while ((line = br.readLine()) != null) {
+            rbt.insert(line);
+        }
+        br.close();
+        return rbt;
+    }
+
     public static void main(String[] args) {
         try {
             long startTime = System.nanoTime();
-            RubroNegra rbt = MakeArvoreArquivo("./src/arvores/arquivos/Pequeno Principe.txt");
+            imprimirArvore rbt = buildTreeFromFile("./src/arvores/arquivos/Pequeno Principe.txt");
             long endTime = System.nanoTime();
-            int comparisons = rbt.getComparisonCount();
-
-            double tempoConvertido = (endTime - startTime) / 1e9;
-
-            System.out.println("Arvore Rubro Negra: ");
-            System.out.println("Tempo de pesquisa: " + tempoConvertido + " segundos");
-            System.out.println("Comparações: " + comparisons);
+            long executionTime = (endTime - startTime) / 1000000; // Em milissegundos
             
-        } catch (IOException e) {
-            System.err.println("Erro ao ler o arquivo.");
-        }
-    }
-
-    public void resumoGeralRubroNegra(String arquivo) {
-        try {
-            long startTime = System.nanoTime();
-
-            RubroNegra rbt = MakeArvoreArquivo(arquivo);
-            long endTime = System.nanoTime();
-            double tempoConvertido = (endTime - startTime) / 1e9;
-
-            System.out.println("Arvore Rubro Negra: ");
-            System.out.println("Tempo de pesquisa: " + tempoConvertido + " segundos");
-            System.out.println("Comparacoes: " + comparisons);
+            System.out.println("Árvore Rubro-Negra:");
+            rbt.printTree();
+            
+            System.out.println("\nTempo de execução: " + executionTime + " ms");
         } catch (IOException e) {
             System.err.println("Erro ao ler o arquivo.");
         }
     }
 }
+
