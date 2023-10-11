@@ -1,5 +1,6 @@
 package arvores.visao;
 
+import arvores.ArvoreRubroNegra.RubroNegra;
 import arvores.Arvore_semAVL.main_TreeBinaria;
 import arvores.arvore_avl.Visao;
 import arvores.frequencia.FrequenciaGeral;
@@ -58,6 +59,7 @@ public class principal extends javax.swing.JFrame {
         jButton1_avl = new javax.swing.JButton();
         jButton1_BuscarTexto3 = new javax.swing.JButton();
         jButton1_avl1 = new javax.swing.JButton();
+        jButton1_avl2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton1_limparCampos = new javax.swing.JButton();
         jButton1_avancar = new javax.swing.JButton();
@@ -92,7 +94,7 @@ public class principal extends javax.swing.JFrame {
                 jButton1_frequencia1ActionPerformed(evt);
             }
         });
-        jFrame1_avancar.getContentPane().add(jButton1_frequencia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 440, 160, 40));
+        jFrame1_avancar.getContentPane().add(jButton1_frequencia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, 160, 40));
 
         jLabel5.setFont(new java.awt.Font("Serif", 3, 36)); // NOI18N
         jLabel5.setText("BUSCA EM ÁRVORES");
@@ -162,7 +164,7 @@ public class principal extends javax.swing.JFrame {
                 jButton1_BuscarTexto3ActionPerformed(evt);
             }
         });
-        jFrame1_avancar.getContentPane().add(jButton1_BuscarTexto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 390, 160, 40));
+        jFrame1_avancar.getContentPane().add(jButton1_BuscarTexto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 440, 160, 40));
 
         jButton1_avl1.setFont(new java.awt.Font("Serif", 3, 16)); // NOI18N
         jButton1_avl1.setText("ÁRVORE BINÁRIA");
@@ -174,6 +176,17 @@ public class principal extends javax.swing.JFrame {
             }
         });
         jFrame1_avancar.getContentPane().add(jButton1_avl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 340, 160, 40));
+
+        jButton1_avl2.setFont(new java.awt.Font("Serif", 3, 16)); // NOI18N
+        jButton1_avl2.setText("ÁRVORE R. NEGRA");
+        jButton1_avl2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jButton1_avl2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1_avl2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1_avl2ActionPerformed(evt);
+            }
+        });
+        jFrame1_avancar.getContentPane().add(jButton1_avl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 390, 160, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arvores/icons/5479107.jpg"))); // NOI18N
         jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
@@ -398,6 +411,11 @@ public class principal extends javax.swing.JFrame {
 
             main_TreeBinaria arvoreBinaria = new main_TreeBinaria();
             arvoreBinaria.resumoGeral(caminhoCortado);
+            
+            System.out.println("------------------------------------------------------------------------------------------------------------");
+
+            RubroNegra rbNegra = new RubroNegra();
+            rbNegra.resumoGeralRubroNegra(caminhoCortado);
 
             System.out.println("------------------------------------------------------------------------------------------------------------");
             FrequenciaGeral frequenciaResumo = new FrequenciaGeral();
@@ -443,6 +461,28 @@ public class principal extends javax.swing.JFrame {
         jTextArea1_saidaArvores.setFont(fontePersonalizada);
 
     }//GEN-LAST:event_maisActionPerformed
+
+    private void jButton1_avl2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_avl2ActionPerformed
+        jTextArea1_saidaArvores.setText("");
+        String caminhoCompleto = jTextField1_aux.getText();
+        String caminhoDesejado = "src";
+        String caminhoCortado = "";
+        int startIndex = caminhoCompleto.indexOf(caminhoDesejado);
+
+        if (startIndex != -1) {
+            caminhoCortado = caminhoCompleto.substring(startIndex);
+        }
+        PrintStream printStream = new PrintStream(new TextAreaOutputStream(jTextArea1_saidaArvores));
+        System.setOut(printStream);
+
+        
+//        Árvore desejada para imprimir
+//        buscaBinaria_main binaria = new buscaBinaria_main();
+//        binaria.resumoGeral(caminhoCortado);
+
+        RubroNegra rubro = new RubroNegra();
+        rubro.resumoGeralRubroNegra(caminhoCortado);
+    }//GEN-LAST:event_jButton1_avl2ActionPerformed
 
     public class TextAreaOutputStream extends OutputStream {
 
@@ -517,6 +557,7 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1_avancar;
     private javax.swing.JButton jButton1_avl;
     private javax.swing.JButton jButton1_avl1;
+    private javax.swing.JButton jButton1_avl2;
     private javax.swing.JButton jButton1_binaria;
     private javax.swing.JButton jButton1_frequencia1;
     private javax.swing.JButton jButton1_limparCampos;

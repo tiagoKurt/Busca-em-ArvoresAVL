@@ -12,7 +12,7 @@ public class main_TreeBinaria {
             long startTime = System.currentTimeMillis();
 
             BinaryTree tree = new BinaryTree();
-            BufferedReader br = new BufferedReader(new FileReader("./src/arvores/arquivos/ExTexto.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("./src/arvores/arquivos/Pequeno Principe.txt"));
             String line;
             int position = 1;
 

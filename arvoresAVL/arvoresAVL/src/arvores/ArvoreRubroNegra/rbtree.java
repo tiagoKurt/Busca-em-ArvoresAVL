@@ -1,4 +1,4 @@
-package arvore;
+package arvores.ArvoreRubroNegra;
 
 //import classes and packages  
 import java.util.Scanner;  
