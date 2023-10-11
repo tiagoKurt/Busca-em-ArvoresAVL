@@ -354,8 +354,8 @@ public class principal extends javax.swing.JFrame {
         PrintStream printStream = new PrintStream(new TextAreaOutputStream(jTextArea1_saidaArvores));
         System.setOut(printStream);
 
-        buscaBinaria_main binaria = new buscaBinaria_main();
-        binaria.resumoGeral(caminhoCortado);
+        InsercaoBinaria binaria = new InsercaoBinaria();
+        binaria.insercaoBinaria(caminhoCortado);
     }//GEN-LAST:event_jButton1_binariaActionPerformed
 
     private void jButton1_avlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_avlActionPerformed
@@ -395,13 +395,13 @@ public class principal extends javax.swing.JFrame {
             PrintStream printStream = new PrintStream(new TextAreaOutputStream(jTextArea1_saidaArvores));
             System.setOut(printStream);
 
-            oMeuDeus.insercaoBinaria(caminhoCortado);
+             oMeuDeus.insercaoBinaria(caminhoCortado);
             System.out.println("------------------------------------------------------------------------------------------------------------");
 
-            buscaBinaria_main binaria = new buscaBinaria_main();
-            binaria.resumoGeral(caminhoCortado);
+            ArvoreB arvoreB = new ArvoreB(3);
+            arvoreB.resumoGeral(caminhoCortado);
 
-            System.out.println("------------------------------------------------------------------------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------------------------------------");;
 
             System.out.println("Arvore AVL");
             Visao resumoArvoreAVL = new Visao();

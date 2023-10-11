@@ -117,7 +117,7 @@ public class InsercaoBinaria {
             long endTime = System.nanoTime();
             double elapsedTimeInSeconds = (endTime - startTime) / 1e9;
 
-            System.out.println("Array Dinamico:");
+            System.out.println("Pesquisa binaria:");
             System.out.println("Tempo de pesquisa (segundos): " + elapsedTimeInSeconds);
             System.out.println("Numero de comparacoes: " + comparisons);
 

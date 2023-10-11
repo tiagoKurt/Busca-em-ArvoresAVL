@@ -50,7 +50,7 @@ public class RubroNegra {
         while (x != TNULL) {
             y = x;
             int cmp = key.compareTo(x.data);
-            comparisons++;
+            this.comparisons++;
             if (cmp < 0) {
                 x = x.left;
             } else {
@@ -63,6 +63,7 @@ public class RubroNegra {
             root = node;
         } else {
             int cmp = key.compareTo(y.data);
+            this.comparisons++;
             if (cmp < 0) {
                 y.left = node;
             } else {
@@ -184,7 +185,6 @@ public class RubroNegra {
         }
     }
 
-    // Outros métodos da árvore rubro-negra
     // Método para contar comparações
     public int getComparisonCount() {
         return comparisons;
@@ -207,18 +207,18 @@ public class RubroNegra {
             }
         }
         BufferedReader br = new BufferedReader(new FileReader(arquivo));
-        
+
         while ((line = br.readLine()) != null) {
-                String[] words = line.split(" ");
-                for (String word : words) {
-                    if (!stopWords.contains(word.toLowerCase())) {
-                        rbt.insert(line);
-                    }
+            String[] words = line.split(" ");
+            for (String word : words) {
+                if (!stopWords.contains(word.toLowerCase())) {
+                    rbt.insert(line);
                 }
             }
-        
+        }
+
         br.close();
-//        rbt.printTree();
+        //rbt.printTree();
         return rbt;
     }
 
@@ -233,12 +233,12 @@ public class RubroNegra {
 
         printTree(node.right, level + 1);
         for (int i = 0; i < level; i++) {
-            System.out.print(" ");
+            System.out.print(" " + "\n");
         }
         System.out.println(node.data + " (" + node.color + ")");
         printTree(node.left, level + 1);
     }
-    
+
     public static void main(String[] args) {
         try {
             long startTime = System.nanoTime();
@@ -251,7 +251,7 @@ public class RubroNegra {
             System.out.println("Arvore Rubro Negra: ");
             System.out.println("Tempo de pesquisa: " + tempoConvertido + " segundos");
             System.out.println("Comparações: " + comparisons);
-            
+
         } catch (IOException e) {
             System.err.println("Erro ao ler o arquivo.");
         }
@@ -264,7 +264,7 @@ public class RubroNegra {
             RubroNegra rbt = MakeArvoreArquivo(arquivo);
             long endTime = System.nanoTime();
             double tempoConvertido = (endTime - startTime) / 1e9;
-
+            int comparisons = rbt.getComparisonCount();
             System.out.println("Arvore Rubro Negra: ");
             System.out.println("Tempo de pesquisa: " + tempoConvertido + " segundos");
             System.out.println("Comparacoes: " + comparisons);
